@@ -76,8 +76,8 @@ public class HttpConverterBenchmarkTest {
         protoUsers.writeTo(protoOutputStream);
         JsonMapper.MAPPER.writeValue(regularOutputStream, regularUsers);
 
-        System.out.println("Size of proto users: " + protoOutputStream.toByteArray().length);
-        System.out.println("Size of regular users: " + regularOutputStream.toByteArray().length);
+        System.out.println("----- Size of proto users: " + protoOutputStream.toByteArray().length);
+        System.out.println("----- Size of regular users: " + regularOutputStream.toByteArray().length);
     }
 
     @Benchmark

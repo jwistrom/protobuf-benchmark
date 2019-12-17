@@ -109,7 +109,7 @@
             </extension>
         </extensions>
         <plugins>
-            <!-- Default binding to generate-sources -->
+            <!-- Default binding to generate-sources, FYI -->
             <plugin>
                 <groupId>org.xolstice.maven.plugins</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
