@@ -1,0 +1,24 @@
+syntax = "proto3";
+option java_package = "com.pricerunner.protobuf.model";
+option java_outer_classname = "UserProto";
+
+message Users {
+    repeated User users = 1;
+}
+
+message User {
+    string name = 1;
+    int32 age = 2;
+    string nickname = 3;
+    repeated Phone phones = 4;
+}
+
+message Phone {
+    int32 number = 1;
+    Type type = 2;
+
+    enum Type {
+        MOBILE = 0;
+        WORK = 1;
+    }
+}

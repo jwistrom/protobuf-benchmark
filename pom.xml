@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pricerunner</groupId>
+    <artifactId>protocol-buffer</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- project -->
+        <revision>SNAPSHOT</revision>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.deploy.skip>true</maven.deploy.skip>
+
+        <spring.version>5.2.1.RELEASE</spring.version>
+        <protobuf.version>3.11.1</protobuf.version>
+
+        <!-- pricerunner dependencies -->
+        <pricerunner.common.version>1.0.0-97304-cd90ebf2</pricerunner.common.version>
+
+        <!-- test dependencies -->
+        <junit.version>5.5.2</junit.version>
+        <jmh.version>1.22</jmh.version>
+
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>maven-proxy</id>
+            <url>https://nexus.pricerunner.info/repository/maven/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>maven-snapshots</id>
+            <url>https://nexus.pricerunner.info/repository/maven-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>${protobuf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
+            <version>${protobuf.version}</version>
+        </dependency>
+
+        <!--        <dependency>-->
+<!--            <groupId>com.googlecode.protobuf-java-format</groupId>-->
+<!--            <artifactId>protobuf-java-format</artifactId>-->
+<!--            <version>1.4</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+
+        <!-- Pricerunner -->
+        <dependency>
+            <groupId>com.pricerunner.common</groupId>
+            <artifactId>pricerunner-common-web-server</artifactId>
+            <version>${pricerunner.common.version}</version>
+        </dependency>
+
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-core</artifactId>
+                <version>${jmh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-generator-annprocess</artifactId>
+                <version>${jmh.version}</version>
+            </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.6.0</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <configuration>
+                    <checkStaleness>true</checkStaleness>
+                    <protocArtifact>com.google.protobuf:protoc:3.11.1:exe:${os.detected.classifier}</protocArtifact>
+                    <!--                            <protocExecutable>/usr/local/bin/protoc</protocExecutable>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>13</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

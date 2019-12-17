@@ -1,0 +1,18 @@
+### eclipse
+**/.settings/
+**/.project
+**/.classpath
+
+### intellij
+**/*.iml
+**/.idea/
+
+### maven
+**/target/
+**/.flattened-pom.xml
+
+
+### log files
+**/*.log
+
+*.csv
