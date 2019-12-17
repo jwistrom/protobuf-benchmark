@@ -92,7 +92,8 @@ public class HttpConverterBenchmarkTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(protoOutputStream.toByteArray());
         HttpInputMessage inputMessage = new BenchmarkHttpInputMessage(inputStream);
         protobufConverter.read(UserProto.Users.class, inputMessage);
-        bh.consume(inputMessage);
+        UserProto.Users users = UserProto.Users.parseFrom(inputMessage.getBody());
+        bh.consume(users);
     }
 
     @Benchmark
@@ -107,6 +108,8 @@ public class HttpConverterBenchmarkTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(regularOutputStream.toByteArray());
         HttpInputMessage inputMessage = new BenchmarkHttpInputMessage(inputStream);
         jsonConverter.read(Users.class, inputMessage);
-        bh.consume(inputMessage);
+        String json = new String(inputMessage.getBody().readAllBytes());
+        Users users = JsonMapper.fromJson(json, Users.class);
+        bh.consume(users);
     }
 }
