@@ -5,6 +5,7 @@ import com.pricerunner.protobuf.model.Builders;
 import com.pricerunner.protobuf.model.UserProto;
 import com.pricerunner.protobuf.model.Users;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +43,7 @@ public class Endpoint {
         final Users users = IntStream.range(0, userCount)
             .mapToObj(__ -> Builders.regularUser(PHONE_COUNT))
             .collect(collectingAndThen(Collectors.toSet(), Users::new));
+
         return users;
     }
 

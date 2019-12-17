@@ -1,5 +1,6 @@
 package com.pricerunner.protobuf;
 
+import com.google.protobuf.Message;
 import com.pricerunner.common.rest.JsonMapper;
 import com.pricerunner.protobuf.model.Builders;
 import com.pricerunner.protobuf.model.UserProto;
@@ -91,8 +92,7 @@ public class HttpConverterBenchmarkTest {
     public void deserializeProtoUsers(final Blackhole bh) throws IOException {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(protoOutputStream.toByteArray());
         HttpInputMessage inputMessage = new BenchmarkHttpInputMessage(inputStream);
-        protobufConverter.read(UserProto.Users.class, inputMessage);
-        UserProto.Users users = UserProto.Users.parseFrom(inputMessage.getBody());
+        UserProto.Users users = (UserProto.Users) protobufConverter.read(UserProto.Users.class, inputMessage);
         bh.consume(users);
     }
 
@@ -107,9 +107,7 @@ public class HttpConverterBenchmarkTest {
     public void deserializeRegularUsers(final Blackhole bh) throws IOException {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(regularOutputStream.toByteArray());
         HttpInputMessage inputMessage = new BenchmarkHttpInputMessage(inputStream);
-        jsonConverter.read(Users.class, inputMessage);
-        String json = new String(inputMessage.getBody().readAllBytes());
-        Users users = JsonMapper.fromJson(json, Users.class);
+        Users users = (Users) jsonConverter.read(Users.class, inputMessage);
         bh.consume(users);
     }
 }
