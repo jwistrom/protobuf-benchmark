@@ -53,7 +53,7 @@ public class HttpConverterBenchmarkTest {
     private ByteArrayOutputStream protoOutputStream;
     private ByteArrayOutputStream regularOutputStream;
 
-    @Param({"100", "1000"})
+    @Param({"10", "100", "1000", "10000"})
     private int usersCount;
 
     @Setup

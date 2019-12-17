@@ -35,7 +35,7 @@ public class SerializationBenchmarkTest {
     private Users regularUsers;
     private UserProto.Users protoUsers;
 
-    @Param({"100", "1000"})
+    @Param({"10", "100", "1000", "10000"})
     private int usersCount;
 
     @Setup
